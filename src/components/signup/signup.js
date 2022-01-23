@@ -38,7 +38,7 @@ const SignUp = () => {
         setState((previousState) => {
           return {
             ...previousState,
-            errMessage: "Checking...",
+            errMessage: "Creating...",
           };
         });
         await handleSignUpAPI(state).then((response) => {
@@ -84,7 +84,14 @@ const SignUp = () => {
             </div>
             <div className="form-group row mb-3 text-center">
               <div className="col-sm-12">
-                <div style={{ color: "red" }} className="errMessage">
+                <div
+                  style={
+                    state.errMessage.charAt(0) == "C"
+                      ? { color: "yellow" }
+                      : { color: "red" }
+                  }
+                  className="errMessage"
+                >
                   {state.errMessage}
                 </div>
                 <button type="submit" className="btn btn-success">
