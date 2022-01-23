@@ -9,6 +9,7 @@ export default function Game(props) {
   const { initialMinute = 0, initialSeconds = 30 } = props;
   const [minutes, setMinutes] = useState(initialMinute);
   const [seconds, setSeconds] = useState(initialSeconds);
+  const [button, setButton] = useState(true);
 
   const history = useHistory();
 
@@ -50,6 +51,7 @@ export default function Game(props) {
     setAnswer(e.target.value);
   };
   const handleSubmit = async (e) => {
+    setButton(false);
     function addZero(i) {
       if (i < 10) {
         i = "0" + i;
@@ -103,7 +105,7 @@ export default function Game(props) {
       <div>
         <input
           type="text"
-          placeholder="Câu trả lời của bạn là"
+          placeholder="Your answer..."
           onChange={handleInput}
         />
         <br />
@@ -111,8 +113,9 @@ export default function Game(props) {
         <input
           id="submit"
           type="submit"
-          value="Submit"
+          value={button ? "Submit" : "Submitting..."}
           onClick={handleSubmit}
+          disabled={!button}
         />
       </div>
     </div>
