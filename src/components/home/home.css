@@ -1,0 +1,38 @@
+body {
+  /* background-color: rgb(243, 126, 126); */
+  color: yellow;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
+}
+
+input {
+  text-decoration: none;
+  border: 5px solid black;
+  border-radius: 30%;
+  text-align: center;
+}
+
+.start {
+  font-size: 100px;
+}
+
+.start:hover {
+  background-color: yellow;
+  color: red;
+}
+
+.year img {
+  margin-top: 73px;
+}
+
+.trangchu img {
+  margin-top: 20px;
+}
+
+.anhdep img {
+  margin-top: 30px;
+}
+
+.batdau {
+  margin-top: 20px;
+}
