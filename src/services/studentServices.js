@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://localhost:2022";
+const baseUrl = "https://see-english-club.herokuapp.com";
 
 const handleSignUpAPI = async (newData) => {
   let data = JSON.stringify({
