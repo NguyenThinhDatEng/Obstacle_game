@@ -11,11 +11,11 @@ const SignUp = () => {
   });
 
   const history = useHistory();
-  useEffect(() => {
-    if (localStorage.getItem("username")) {
-      history.push("/ready");
-    }
-  });
+  // useEffect(() => {
+  //   if (localStorage.getItem("username")) {
+  //     history.push("/ready");
+  //   }
+  // });
 
   const handleUsername = (e) => {
     setState((previousState) => {

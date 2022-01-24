@@ -77,7 +77,7 @@ export default function Game(props) {
         console.log(JSON.stringify(response));
         if (response.data) {
           // localStorage.setItem("username", JSON.stringify(response.data));
-          history.push("/home");
+          history.push("/ready");
         }
       });
     } catch (error) {
@@ -88,7 +88,7 @@ export default function Game(props) {
   return (
     <div className="bg">
       {minutes === 0 && seconds === 0 ? (
-        history.push("/home")
+        history.push("/ready")
       ) : (
         <h1 style={{ color: "white" }}>
           {" "}
