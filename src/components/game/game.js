@@ -6,10 +6,11 @@ import "./game.css";
 export default function Game(props) {
   const [question, setQuestion] = useState({});
   const [answer, setAnswer] = useState("");
-  const { initialMinute = 0, initialSeconds = 30 } = props;
+  const { initialMinute = 0, initialSeconds = 15 } = props;
   const [minutes, setMinutes] = useState(initialMinute);
   const [seconds, setSeconds] = useState(initialSeconds);
   const [button, setButton] = useState(true);
+  const [warning, setWarning] = useState("");
 
   const history = useHistory();
 
@@ -48,6 +49,7 @@ export default function Game(props) {
   });
 
   const handleInput = (e) => {
+    setWarning("");
     setAnswer(e.target.value);
   };
   const handleSubmit = async (e) => {
@@ -96,6 +98,11 @@ export default function Game(props) {
       <div>
         <h1
           style={{ color: "yellow", marginLeft: "180px", marginRight: "180px" }}
+          onCopy={(e) => {
+            setWarning("Copying is strictly prohibited");
+            e.preventDefault();
+            return false;
+          }}
         >
           Question {question.STT}: {question.content}
         </h1>
@@ -107,9 +114,25 @@ export default function Game(props) {
           type="text"
           placeholder="Your answer..."
           onChange={handleInput}
+          onPaste={(e) => {
+            setWarning("Paste is strictly prohibited");
+            e.preventDefault();
+            return false;
+          }}
+          onCopy={(e) => {
+            setWarning("Copying is strictly prohibited");
+            e.preventDefault();
+            return false;
+          }}
         />
         <br />
         <br />
+        <div
+          className="errMessage"
+          style={{ color: "yellow", fontSize: "18px" }}
+        >
+          {warning ? "WARNING: " + warning : ""}
+        </div>
         <input
           id="submit"
           type="submit"

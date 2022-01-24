@@ -86,7 +86,7 @@ const SignUp = () => {
               <div className="col-sm-12">
                 <div
                   style={
-                    state.errMessage.charAt(0) == "C"
+                    state.errMessage.charAt(0) ===   "C"
                       ? { color: "yellow" }
                       : { color: "red" }
                   }
