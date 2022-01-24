@@ -7,6 +7,7 @@ import "./signup.css";
 const SignUp = () => {
   const [state, setState] = useState({
     username: "",
+    password: "",
     errMessage: "",
   });
 
@@ -19,7 +20,19 @@ const SignUp = () => {
 
   const handleUsername = (e) => {
     setState((previousState) => {
+      return { ...previousState, errMessage: "" };
+    });
+    setState((previousState) => {
       return { ...previousState, username: e.target.value };
+    });
+  };
+
+  const handlePassword = (e) => {
+    setState((previousState) => {
+      return { ...previousState, errMessage: "" };
+    });
+    setState((previousState) => {
+      return { ...previousState, password: e.target.value };
     });
   };
 
@@ -28,34 +41,42 @@ const SignUp = () => {
     setState((previousState) => {
       return { ...previousState, errMessage: "" };
     });
-
-    if (!state.username) {
+    // check input
+    if (!state.username || !state.password) {
       setState((previousState) => {
         return { ...previousState, errMessage: "Missing required parameter!" };
       });
-    } else {
-      try {
-        setState((previousState) => {
-          return {
-            ...previousState,
-            errMessage: "Creating...",
-          };
-        });
-        await handleSignUpAPI(state).then((response) => {
-          console.log(JSON.stringify(response));
-          if (response.data) {
-            localStorage.setItem("username", JSON.stringify(response.data));
-            history.push("/ready");
-          }
-        });
-      } catch (error) {
-        setState((previousState) => {
-          return {
-            ...previousState,
-            errMessage: error.response.data.msg,
-          };
-        });
-      }
+      return;
+    }
+    console.info(state.password);
+    if (state.password != "seeenglish2022") {
+      setState((previousState) => {
+        return { ...previousState, errMessage: "Wrong password" };
+      });
+      return;
+    }
+    // call api
+    try {
+      setState((previousState) => {
+        return {
+          ...previousState,
+          errMessage: "Creating...",
+        };
+      });
+      await handleSignUpAPI(state).then((response) => {
+        console.log(JSON.stringify(response));
+        if (response.data) {
+          localStorage.setItem("username", JSON.stringify(response.data));
+          history.push("/ready");
+        }
+      });
+    } catch (error) {
+      setState((previousState) => {
+        return {
+          ...previousState,
+          errMessage: error.response.data.msg,
+        };
+      });
     }
   };
 
@@ -65,8 +86,9 @@ const SignUp = () => {
         <main className="signup-form">
           <form onSubmit={handleSubmit}>
             <h1 className="login-title mb-4" style={{ color: "green" }}>
-              Sign up
+              create username
             </h1>
+            {/* username */}
             <div className="form-group row mb-3">
               <div className="col-sm-2 col-form-label">
                 <label htmlFor="username" style={{ fontSize: "18px" }}>
@@ -79,6 +101,23 @@ const SignUp = () => {
                   className="form-control"
                   id="username"
                   onChange={handleUsername}
+                />
+              </div>
+            </div>
+            {/* password */}
+            <div className="form-group row mb-3">
+              <div className="col-sm-2 col-form-label">
+                <label htmlFor="password" style={{ fontSize: "18px" }}>
+                  Password
+                </label>
+              </div>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="password"
+                  placeholder="password provided by the organizer"
+                  onChange={handlePassword}
                 />
               </div>
             </div>
