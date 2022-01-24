@@ -1,8 +1,8 @@
 import React from "react";
-import "./home.css";
+import "./ready.css";
 import { useHistory } from "react-router-dom";
 
-export default function Home() {
+export default function Ready() {
   const history = useHistory();
   return (
     <div className="bg">
@@ -30,5 +30,3 @@ export default function Home() {
     </div>
   );
 }
-
-// export default Home;

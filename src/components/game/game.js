@@ -6,7 +6,7 @@ import "./game.css";
 export default function Game(props) {
   const [question, setQuestion] = useState({});
   const [answer, setAnswer] = useState("");
-  const { initialMinute = 0, initialSeconds = 16 } = props;
+  const { initialMinute = 0, initialSeconds = 15 } = props;
   const [minutes, setMinutes] = useState(initialMinute);
   const [seconds, setSeconds] = useState(initialSeconds);
   const [button, setButton] = useState(true);

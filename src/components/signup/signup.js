@@ -12,8 +12,8 @@ const SignUp = () => {
 
   const history = useHistory();
   useEffect(() => {
-    if (localStorage.getItem("user-info")) {
-      history.push("/home");
+    if (localStorage.getItem("username")) {
+      history.push("/ready");
     }
   });
 
@@ -45,7 +45,7 @@ const SignUp = () => {
           console.log(JSON.stringify(response));
           if (response.data) {
             localStorage.setItem("username", JSON.stringify(response.data));
-            history.push("/home");
+            history.push("/ready");
           }
         });
       } catch (error) {
@@ -86,7 +86,7 @@ const SignUp = () => {
               <div className="col-sm-12">
                 <div
                   style={
-                    state.errMessage.charAt(0) ===   "C"
+                    state.errMessage.charAt(0) === "C"
                       ? { color: "yellow" }
                       : { color: "red" }
                   }
